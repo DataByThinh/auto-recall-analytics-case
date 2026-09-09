@@ -416,7 +416,7 @@ auto-recall-analytics-case/
 
 View the complete research poster:
 
-[**Open Full Research Poster (PDF)**](presentation/auto-recall-research-poster.pdf)
+[**Open Full Research Poster (PDF)**](final_presentation.pdf)
 
 ---
 
