@@ -1,236 +1,358 @@
 # 🚗 U.S. Automotive Recall Analytics
 
-> **Analyzing 25 years of U.S. vehicle recall data to identify safety risks, defect trends, and the growing role of software in automotive reliability.**
+<p align="center">
 
-**Python • Pandas • Statistical Analysis • Regression • Data Visualization • Automotive Analytics**
+<img src="https://img.shields.io/badge/Python-Data%20Analytics-3776AB?style=for-the-badge&logo=python&logoColor=white" />
+<img src="https://img.shields.io/badge/Pandas-Data%20Wrangling-150458?style=for-the-badge&logo=pandas&logoColor=white" />
+<img src="https://img.shields.io/badge/scikit--learn-Regression-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white" />
+<img src="https://img.shields.io/badge/Power%20BI-Business%20Intelligence-F2C811?style=for-the-badge&logo=powerbi&logoColor=black" />
+<img src="https://img.shields.io/badge/NHTSA-Public%20Safety%20Data-005EA8?style=for-the-badge" />
+<img src="https://img.shields.io/badge/Excel-Analysis-217346?style=for-the-badge&logo=microsoftexcel&logoColor=white" />
+
+</p>
+
+<p align="center">
+  <strong>25 Years of Automotive Safety Intelligence</strong><br>
+Manufacturer benchmarking, defect-risk analysis, and recall trend modeling using 29K+ NHTSA records.
+</p>
+
+> **What if recall volume alone is hiding where the real automotive safety risk is?**
+>
+> This project transforms 25 years of U.S. automotive recall data into structured defect categories, safety-severity indicators, manufacturer benchmarks, and predictive trend insights to understand how vehicle reliability is evolving from mechanical failures toward software-driven risk.
+
+<img src="automotive-recall-analytics.png" width="100%" />
 
 ---
 
-## 📌 Project Overview
+## 🧠 What This Analysis Does
 
-Automotive recalls provide an important signal of **product quality, safety risk, and operational reliability**.
+The project answers four core business questions:
 
-This project analyzes **30K+ NHTSA recall records from 2000–2025** to understand how recall patterns have evolved across manufacturers, defect categories, and safety severity levels.
-
-The analysis focuses on three core questions:
-
-* Which manufacturers generate the largest recall volumes and the highest concentrations of critical safety issues?
-* How have automotive defect patterns shifted from **mechanical failures toward software and electronic systems**?
-* What trends can help manufacturers and analysts identify emerging product-quality risks?
+| Question                                                                  | Analytical Approach                       |
+| ------------------------------------------------------------------------- | ----------------------------------------- |
+| *Which manufacturers generate the most recalls?*                          | Manufacturer benchmarking                 |
+| *Which manufacturers have the highest concentration of critical defects?* | Safety severity analysis                  |
+| *What types of failures are driving automotive recalls?*                  | Text classification + feature engineering |
+| *How is recall risk changing as vehicles become more software-driven?*    | Trend analysis + regression modeling      |
 
 ---
 
-## 🔍 Analytical Workflow
+## 🏗️ Analytics Architecture
+
+<img src="recall-analytics-architecture.png" width="100%" />
 
 ```text
 NHTSA Recall Data
-       ↓
+        ↓
 Data Cleaning & Filtering
-       ↓
-6,479 Passenger-Vehicle Recalls
-       ↓
-Text Classification & Feature Engineering
-       ↓
-Defect Categories + Safety Severity
-       ↓
-Exploratory & Trend Analysis
-       ↓
+        ↓
+Passenger Vehicle Dataset
+        ↓
+Text Classification
+        ↓
+Feature Engineering
+        ↓
+Safety Severity Scoring
+        ↓
+EDA & Manufacturer Benchmarking
+        ↓
 Regression Modeling
-       ↓
-Business Insights & Visualization
+        ↓
+Power BI Insights
 ```
 
 ---
 
-## 📊 Data
+## 🔄 Data Pipeline
 
-**Source:** National Highway Traffic Safety Administration (NHTSA)
+Built to transform raw recall records into an analytics-ready dataset for business intelligence and predictive analysis.
 
-| Stage                              |   Records |
-| ---------------------------------- | --------: |
-| Raw recall records                 |    29,663 |
-| Passenger-vehicle recalls analyzed |     6,479 |
-| Analysis period                    | 2000–2025 |
+### 📥 Raw Data
 
-The raw dataset was cleaned and transformed to isolate recalls relevant to personal passenger vehicles.
+Started with **29,663 NHTSA recall records** covering model years and recall activity from **2000–2025**.
 
-Recall descriptions were then converted into structured analytical features including:
+### 🧹 Cleaning & Filtering
 
-* Manufacturer
-* Recall year
-* Defect category
-* Component type
-* Safety severity
-* Software / electronic vs. mechanical issue
+Filtered and standardized the dataset to isolate:
 
----
+**6,479 passenger-vehicle recall records**
 
-## 🧠 Methodology
+Cleaning included:
 
-### 1. Data Preparation
+* Manufacturer standardization
+* Vehicle-type filtering
+* Missing-value treatment
+* Duplicate review
+* Text normalization
+* Date and category transformation
 
-Used Python and Pandas to:
+### 🧠 Feature Engineering
 
-* clean and standardize recall records
-* remove irrelevant vehicle categories
-* normalize manufacturer information
-* process unstructured recall descriptions
-* create analysis-ready features
+Unstructured recall descriptions were converted into structured analytical features including:
 
-### 2. Defect Classification
+`Manufacturer` · `Defect Category` · `Severity Level` · `Component Type` · `Mechanical / Software`
 
-Recall descriptions were transformed into structured defect categories such as:
+Safety-critical indicators captured issues related to:
 
-`Airbag` · `Brakes` · `Steering` · `Fuel System` · `Drive Power` · `Software / Electronics` · `High-Voltage Battery`
-
-### 3. Safety Severity Engineering
-
-Developed severity indicators based on safety-critical failure patterns including:
-
-* fire risk
-* airbag failure
-* steering loss
-* braking failure
-* loss of drive power
-* fuel leakage
-* high-voltage battery hazards
-
-This allowed the analysis to move beyond simple recall volume and compare manufacturers based on **risk concentration**.
-
-### 4. Trend & Predictive Analysis
-
-Analyzed long-term recall patterns and applied **linear and polynomial regression** to evaluate the growth of software-related automotive recalls.
+🔥 **Fire**
+🎈 **Airbags**
+🛞 **Steering**
+🛑 **Brakes**
+⛽ **Fuel Leakage**
+🔋 **High-Voltage Battery**
+⚙️ **Loss of Drive Power**
 
 ---
 
-# 📈 Key Findings
+## 📊 Manufacturer & Safety Analysis
 
-### Ford generated the highest overall recall volume
+Recall volume alone does not fully represent product risk.
 
-Across the analyzed passenger-vehicle recalls, Ford recorded the largest number of recall events.
+This project evaluates manufacturers from two different perspectives:
 
-However, recall volume alone does not fully represent safety performance.
+| Metric               | Business Meaning                                                  |
+| -------------------- | ----------------------------------------------------------------- |
+| **Recall Volume**    | How frequently a manufacturer experiences recall events           |
+| **Criticality Rate** | How concentrated those recalls are in high-severity safety issues |
 
----
+### Key Result
 
-### Volkswagen showed the highest concentration of critical recalls
+**Ford** recorded the highest overall recall volume in the analyzed dataset.
 
-When recalls were evaluated using safety-severity indicators rather than total volume, Volkswagen exhibited the highest **criticality rate** among major manufacturers analyzed.
-
-This highlights an important distinction:
-
-> **High recall volume ≠ high safety severity.**
-
-Both metrics are necessary when evaluating manufacturer risk.
-
----
-
-### 💻 Software is becoming a major automotive reliability risk
-
-Historically, vehicle recalls were dominated by mechanical failures.
-
-The analysis shows software and electronic recalls accelerating over time and **surpassing mechanical recalls by 2023**.
-
-Regression modeling suggests that software-related recalls could reach approximately **2.5× current levels by 2035** if historical trends continue.
-
-This shift reflects a broader transformation in automotive risk:
+However, **Volkswagen** showed the highest concentration of critical recalls among major manufacturers analyzed.
 
 ```text
-Mechanical Reliability
+High Recall Volume
+        ≠
+High Safety Severity
+```
+
+This distinction allows manufacturer performance to be evaluated beyond simple recall counts.
+
+---
+
+## ⚙️ Defect Intelligence
+
+Recall descriptions were categorized to identify how product failures are changing over time.
+
+The analysis compares traditional mechanical failures against emerging software and electronic issues.
+
+### Automotive Reliability Shift
+
+```text
+Mechanical Systems
         ↓
-Electronics Integration
+Electronic Systems
+        ↓
+Connected Vehicles
         ↓
 Software-Defined Vehicles
         ↓
-New Product Quality & Safety Risks
+New Reliability Risks
+```
+
+One of the strongest patterns in the dataset was the increasing contribution of **software and electronic defects** to total recall activity.
+
+---
+
+## 🤖 Trend Modeling
+
+### Software Recall Growth
+
+Linear and polynomial regression were used to evaluate the historical growth of software-related recalls.
+
+The modeling pipeline:
+
+```text
+Historical Recall Data
+        ↓
+Software Recall Classification
+        ↓
+Year-Level Aggregation
+        ↓
+Trend Feature Engineering
+        ↓
+Linear + Polynomial Regression
+        ↓
+Future Recall Projection
+```
+
+### Key Finding
+
+Software/electronic recalls surpassed mechanical recalls by **2023** within the analyzed dataset.
+
+Historical trend modeling suggests software-related recalls could grow to approximately:
+
+# **2.5× by 2035**
+
+if the observed historical trajectory continues.
+
+> The projection is intended as a trend scenario rather than a deterministic forecast.
+
+---
+
+## 📈 Key Insights
+
+### 🥇 Ford — Highest Recall Volume
+
+Ford generated the highest number of recall events among the manufacturers analyzed.
+
+This indicates significant recall exposure but does not automatically imply the highest safety risk.
+
+---
+
+### ⚠️ Volkswagen — Highest Criticality Rate
+
+Volkswagen showed a greater concentration of recalls associated with high-severity safety categories.
+
+This demonstrates why **severity-adjusted analysis** provides additional information beyond total recall counts.
+
+---
+
+### 💻 Software Risk Is Accelerating
+
+Software and electronics represent an increasingly important source of vehicle reliability risk.
+
+As vehicles become more software-defined, traditional manufacturing quality controls may need to expand toward:
+
+* Software validation
+* Embedded-system testing
+* OTA update governance
+* Post-release monitoring
+* Cross-functional engineering risk management
+
+---
+
+## 💡 Business Intelligence Framework
+
+The project reframes automotive recall analysis around four dimensions:
+
+```text
+Recall Risk
+    │
+    ├── Volume
+    │
+    ├── Severity
+    │
+    ├── Defect Type
+    │
+    └── Trend Growth
+```
+
+Instead of asking only:
+
+> **“Which manufacturer has the most recalls?”**
+
+the project asks:
+
+> **“Where is product safety risk concentrated, what is causing it, and how is that risk changing over time?”**
+
+---
+
+## 📊 Power BI Dashboard
+
+The dashboard translates the analytical dataset into interactive manufacturer and defect intelligence.
+
+### Core Views
+
+| View                           | Description                                                           |
+| ------------------------------ | --------------------------------------------------------------------- |
+| 🏭 **Manufacturer Overview**   | Compare recall volume across major automotive manufacturers           |
+| ⚠️ **Safety Severity**         | Identify manufacturers with higher concentrations of critical recalls |
+| 🔧 **Defect Analysis**         | Explore recall patterns by component and failure category             |
+| 💻 **Software vs. Mechanical** | Track the shift in recall composition over time                       |
+| 📈 **Trend Intelligence**      | Visualize historical patterns and long-term recall growth             |
+
+```text
+Processed Recall Data
+          ↓
+Analytical KPIs
+          ↓
+Manufacturer & Defect Analysis
+          ↓
+Trend Modeling
+          ↓
+Interactive Power BI Dashboard
 ```
 
 ---
 
-## 💼 Business Implications
+## 🛠️ Tech Stack
 
-The findings suggest that automotive quality organizations should evaluate recalls using more than total recall counts.
+### Analytics & Data Science
 
-A stronger monitoring framework should combine:
+`Python` `Pandas` `NumPy` `scikit-learn`
 
-**Recall Volume × Safety Severity × Defect Type × Trend Growth**
+### Business Intelligence
 
-For manufacturers and suppliers, increasing software complexity may require greater investment in:
+`Power BI` `Excel`
 
-* software quality assurance
-* validation and testing
-* embedded-system monitoring
-* post-release defect detection
-* cross-functional engineering risk management
+### Analytical Methods
 
-For analysts, separating **recall frequency from recall severity** provides a more useful view of manufacturer product-quality risk.
+`EDA` `Feature Engineering` `Text Classification` `Trend Analysis` `Linear Regression` `Polynomial Regression`
 
----
+### Data Source
 
-## 🛠️ Skills Demonstrated
-
-**Data Analytics**
-
-* Exploratory Data Analysis
-* Trend Analysis
-* Business KPI Development
-* Data Visualization
-
-**Data Science**
-
-* Feature Engineering
-* Text-Based Classification
-* Linear Regression
-* Polynomial Regression
-
-**Data Engineering**
-
-* Data Cleaning
-* Data Transformation
-* Structured Analytical Dataset Development
-
-**Business Analysis**
-
-* Problem Framing
-* Risk Segmentation
-* Manufacturer Benchmarking
-* Insight Translation
+`National Highway Traffic Safety Administration — NHTSA`
 
 ---
 
-## 🧰 Tech Stack
-
-`Python` `Pandas` `NumPy` `Matplotlib` `Excel` `Tableau`
-
----
-
-## 📂 Repository Structure
+## 📁 Project Structure
 
 ```text
 auto-recall-analytics-case/
 │
+├── README.md
+├── requirements.txt
+├── .gitignore
+│
 ├── data/
 │   ├── raw/
+│   │   └── ...                 # Original NHTSA recall data
+│   │
 │   └── processed/
+│       └── ...                 # Cleaned analytics-ready datasets
 │
 ├── notebooks/
-│   ├── data_cleaning.ipynb
-│   ├── exploratory_analysis.ipynb
-│   └── regression_analysis.ipynb
+│   ├── 01_data_cleaning.ipynb
+│   ├── 02_defect_classification.ipynb
+│   ├── 03_exploratory_analysis.ipynb
+│   └── 04_regression_modeling.ipynb
+│
+├── src/
+│   └── ...                     # Reusable analysis / transformation scripts
 │
 ├── visuals/
+│   └── ...                     # Charts and analytical outputs
 │
-├── presentation/
+├── dashboard/
+│   └── ...                     # Power BI dashboard assets
 │
-└── README.md
+└── automotive-recall-analytics.png
 ```
 
 ---
 
 ## 🎯 Project Takeaway
 
-This project demonstrates how unstructured public safety data can be transformed into an analytical framework for evaluating **product quality, manufacturer risk, and emerging automotive technology trends**.
+Automotive recall risk is no longer purely a **mechanical reliability problem**.
 
-Rather than simply asking **“Who has the most recalls?”**, the analysis asks a more useful business question:
+The growing role of software and electronics introduces a new layer of product-quality risk that requires manufacturers to evaluate not only **how often failures occur**, but also:
 
-> **Where is automotive safety risk concentrated — and how is that risk changing as vehicles become increasingly software-driven?**
+**how severe they are, what systems they affect, and how quickly those risks are evolving.**
+
+---
+
+## 👤 Author
+
+**Thinh Nguyen**
+
+Data Analytics / Data Science / Analytics Engineering
+
+---
+
+<div align="center">
+
+**Turning public safety data into product-risk intelligence.**
+
+</div>
