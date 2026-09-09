@@ -412,6 +412,12 @@ auto-recall-analytics-case/
 
 **Market response** tells us why that risk matters beyond the factory floor.
 
+## 📄 Final Research Poster
+
+View the complete research poster:
+
+[**Open Full Research Poster (PDF)**](presentation/auto-recall-research-poster.pdf)
+
 ---
 
 ## 👥 Authors
